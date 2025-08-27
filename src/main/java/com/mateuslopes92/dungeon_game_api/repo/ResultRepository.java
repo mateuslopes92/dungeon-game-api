@@ -1,4 +1,4 @@
-package com.mateuslopes92.dungeon_game_api.entity;
+package com.mateuslopes92.dungeon_game_api.repo;
 
 import com.mateuslopes92.dungeon_game_api.entity.Result;
 import org.springframework.data.jpa.repository.JpaRepository;

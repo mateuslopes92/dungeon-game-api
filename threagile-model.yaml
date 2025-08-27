@@ -1,0 +1,59 @@
+title: "Dungeon Game API Threat Model"
+author:
+  name: Mateus Lopes
+  email: mateus@example.com
+date: "2025-08-26"
+business_criticality: important
+# security_requirements:
+#   - Protect user inputs and stored results
+#   - Ensure database credentials are not leaked
+#   - Harden container images
+
+tags:
+  - spring-boot
+  - postgres
+  - docker
+
+# ============ TECHNICAL ASSETS ============
+technical_assets:
+
+  dungeon-api:
+    type: process
+    technology: spring-boot
+    usage: business
+    confidentiality: confidential
+    integrity: critical
+    availability: important
+    data_assets_processed:
+      - game-results
+    in_scope: true
+
+  postgres-db:
+    type: datastore
+    technology: postgresql
+    usage: business
+    confidentiality: confidential
+    integrity: critical
+    availability: important
+    data_assets_stored:
+      - game-results
+    in_scope: true
+
+# ============ DATA ASSETS ============
+data_assets:
+
+  game-results:
+    description: "Stores user inputs and dungeon challenge results"
+    confidentiality: confidential
+    integrity: critical
+    availability: important
+
+# ============ COMMUNICATION LINKS ============
+communication_links:
+
+  api-to-db:
+    source: dungeon-api
+    target: postgres-db
+    protocol: jdbc
+    data_assets_sent:
+      - game-results

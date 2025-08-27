@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:16
+    container_name: dungeon-db
+    environment:
+      POSTGRES_USER: dungeon
+      POSTGRES_PASSWORD: dungeon
+      POSTGRES_DB: dungeon_game
+    ports:
+      - "5432:5432"
+    networks:
+      - dungeon-net
+
+  app:
+    build: .
+    container_name: dungeon-app
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/dungeon_game
+      SPRING_DATASOURCE_USERNAME: dungeon
+      SPRING_DATASOURCE_PASSWORD: dungeon
+    ports:
+      - "8080:8080"
+    networks:
+      - dungeon-net
+
+networks:
+  dungeon-net:
